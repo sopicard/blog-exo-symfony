@@ -6,7 +6,7 @@
 body {
     font-family: Calibri;
 }
-h1 {
+.main-title {
     text-align: center;
     background-color: antiquewhite;
     text-transform: uppercase;
@@ -82,9 +82,7 @@ footer {
     }
     .menu {
         justify-content: center;
-
     }
-  
 }
 
 

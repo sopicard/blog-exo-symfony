@@ -1,7 +1,9 @@
-{% include"_header.html.twig" %}
-<div class="container">
-      {% for article in last_articles %}
-            {% include "_article.html.twig" %}
-      {% endfor %}
-</div>
-{% include"_footer.html.twig" %}
+{% extends "base.html.twig" %}
+
+      {% block main %}
+            <section class= "container">
+                  {% for article in last_articles %}
+                        {% include "_article.html.twig" %}
+                  {% endfor %}
+            </section>
+      {% endblock %}
