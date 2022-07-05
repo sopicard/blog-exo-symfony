@@ -1,9 +1,18 @@
 {% extends "base.html.twig" %}
+{% block title %}
+    <title>{{ "articles_list" }}</title>
+{% endblock %}
 
-      {% block main %}
-           <section class= "container">
-                  {% for article in articles_list  %}
-                         {% include "_article.html.twig" %}
-                  {% endfor %}
-           </section>
-       {% endblock %}
+{% block main %}
+   <section class= "container">
+          {% for article in articles_list  %}
+                 {% include "_article.html.twig" %}
+          {% endfor %}
+   </section>
+{% endblock %}
+
+{% block footer %}
+    <footer>
+        <p> footer 2 </p>
+    </footer>
+{% endblock %}
