@@ -24,17 +24,19 @@
         </ul>
     </nav>
 </header>
+
 <main>
 
     {% block main %}
     {% endblock %}
 
 </main>
-{% block footer %}
-    <footer>
-        <p> </p>
-    </footer>
-{% endblock %}
+
+<footer>
+    {% block footer %}
+        <p>footer</p>
+    {% endblock %}
+</footer>
 
 </body>
 </html>
