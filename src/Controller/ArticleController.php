@@ -70,7 +70,7 @@ class ArticleController extends AbstractController
         $article->setContent("Lorem ipsum");
         //ensuite je vais créer une var entityManager contenant
         // l'instance de classe EntityManagerInterface
-        // le tout mis en paramètres de ma fonction insertArticle(version raccourcie du mot clé "new"
+        // le tout mis en paramètres de ma fonction insertArticle(version raccourcie du mot clé "new")
 
         //pour finir je pré enregistre mon nouvel article avec la fonction persist
         //et je l'envoie à la db avec la fonction flush
