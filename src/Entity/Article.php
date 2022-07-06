@@ -42,4 +42,5 @@ class Article
 // les infos préexistantes et les nouvelles pour une MAJ
 //fait en 2 temps :
 //php bin/console make:migration
+//bien vérifier mes infos dans le dossier migrations avant de migrer définitivement vers ma table
 // puis php bin/console doctrine:migration:migrate
