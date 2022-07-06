@@ -5,6 +5,10 @@ namespace App\Entity;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+// table générée via cmder
+//php bin/console make:entity
+//ensuite le terminal pose les questions chronologiques de création de class(entité) et de propriétés
+// avec une différence : propriétés = en private
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
  */
