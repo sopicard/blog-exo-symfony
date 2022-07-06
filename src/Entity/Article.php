@@ -10,18 +10,36 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Article
 {
-    // chaque ligne @ORM décrit une ligne miroir que l'on trouvera dans la table
+    // chaque ligne @ORM décrit comment chaque colonne seront crées sur la table
     /**
      * @ORM\Id()
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue()
      */
-
     public $id;
 
     /**
      * @ORM\Column(type="string")
      */
     public $title;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $image;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    public $isPublished;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $author;
 }
-// dans cmder j'ordonne de migrer mes (nouvelles) infos php vers la table SQL
+// dans cmder j'ordonne de migrer mes infos php vers la table SQL. un comparatif sera fait entre
+// les infos préexistantes et les nouvelles pour une MAJ
+//fait en 2 temps :
+//php bin/console make:migration
+// puis php bin/console doctrine:migration:migrate
