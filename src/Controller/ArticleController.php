@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Article;
 
 class ArticleController extends AbstractController
 {
@@ -52,4 +54,30 @@ class ArticleController extends AbstractController
         ];
         return $this->render("article.html.twig", ["article" => $article[$id]]);
     }
+
+    // je crée une nouvelle route + méthode pour créer une nouvel article dans ma table existante article
+    /**
+     * @Route("insert-article", name="insert_article")
+     */
+    public function insertArticle(EntityManagerInterface $entityManager)
+    {
+        // je crée une variable dans laquelle je mets une nouvelle instance de mon entité Article
+        $article = new Article();
+        // et je définis les nouvelles données grâce à l'instance de classe que j'ai appelée au-dessus
+        $article->setTitre("Nouveau titre");
+        $article->setIsPublished(true);
+        $article->setAuthor("Nouvel auteur");
+        $article->setContent("Lorem ipsum");
+        //ensuite je vais créer une var entityManager contenant
+        // l'instance de classe EntityManagerInterface
+        // le tout mis en paramètres de ma fonction insertArticle(version raccourcie du mot clé "new"
+
+        //pour finir je pré enregistre mon nouvel article avec la fonction persist
+        //et je l'envoie à la db avec la fonction flush
+        $entityManager->persist($article);
+        $entityManager->flush();
+
+        dd($article);
+    }
+
 }
