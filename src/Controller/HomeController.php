@@ -12,7 +12,7 @@ class HomeController extends AbstractController
      */
     public function home()
     {
-        $articles_list = [
+        $articlesList = [
             1 => [
                 'id' => 1,
                 'title' => 'Non, là c\'est sale',
@@ -51,8 +51,8 @@ class HomeController extends AbstractController
             ]
         ];
 
-        $last_articles = array_slice($articles_list,1);
+        $lastArticles = array_slice($articlesList,1);
 
-        return $this->render("home.html.twig",["last_articles" => $last_articles]);
+        return $this->render("home.html.twig",["lastArticles" => $lastArticles]);
     }
 }

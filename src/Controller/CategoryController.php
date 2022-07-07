@@ -11,7 +11,7 @@ use App\Entity\Category;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("insert-category", name="insert_category")
+     * @Route("insert_category", name="insert_category")
      */
     public function insertCategory(EntityManagerInterface $entityManager)
     {

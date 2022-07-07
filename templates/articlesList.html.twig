@@ -1,12 +1,12 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    <title>{{ "articles_list" }}</title>
+    <title>{{ "articlesList" }}</title>
 {% endblock %}
 
 {% block main %}
    <section class= "container">
-          {% for article in articles_list  %}
+          {% for article in articlesList  %}
                  {% include "_article.html.twig" %}
           {% endfor %}
    </section>

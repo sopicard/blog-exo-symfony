@@ -65,7 +65,7 @@ class ArticleController extends AbstractController
         // je crée une variable dans laquelle je mets une nouvelle instance de mon entité Article
         $article = new Article();
         // et je définis les nouvelles données grâce à l'instance de classe que j'ai appelée au-dessus
-        $article->setTitre("Nouveau titre");
+        $article->setTitle("Nouveau titre");
         $article->setIsPublished(true);
         $article->setAuthor("Nouvel auteur");
         $article->setContent("Lorem ipsum");
@@ -78,7 +78,17 @@ class ArticleController extends AbstractController
         $entityManager->persist($article);
         $entityManager->flush();
 
-        dd($article);
+        $article1 = new Article();
+        $article1->setTitle("Bienvenue");
+        $article1->setIsPublished(true);
+        $article1->setAuthor("So");
+        $article1->setContent("Lorem ipsum");
+
+        $entityManager->persist($article1);
+        $entityManager->flush();
+
+        dd($article1);
+
     }
 
     // je commente la première partie (ci-dessus) avec le fake tableau de db
@@ -88,23 +98,23 @@ class ArticleController extends AbstractController
     //ce qui me permet de me servir des propriétés de la classe repository => récupération de données
     // find => spécifique pour récup id
     /**
-     * @Route("article", name="article")
+     * @Route("article/{id}", name="article")
      */
-    public function showArticle(ArticleRepository $articleRepository)
+    public function showArticle(ArticleRepository $articleRepository,$id)
     {
-        $article = $articleRepository->find(1);
+        $article = $articleRepository->find($id);
 
         return $this->render("article.html.twig", ["article" => $article]);
     }
 
     /**
-     * @Route("articles_list", name="articles_list")
+     * @Route("articlesList", name="articlesList")
      */
     public function showArticles(ArticleRepository $articlesRepository)
     {
-        $articles_list = $articlesRepository->findall();
+        $articlesList = $articlesRepository->findall();
 
-        return $this->render("articles_list.html.twig", ["articles_list" => $articles_list]);
+        return $this->render("articlesList.html.twig", ["articlesList" => $articlesList]);
 
     }
 }
