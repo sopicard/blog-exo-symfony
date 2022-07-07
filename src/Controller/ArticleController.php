@@ -56,7 +56,7 @@ class ArticleController extends AbstractController
 //        return $this->render("article.html.twig", ["article" => $article[$id]]);
 //    }
 //
-//    // je crée une nouvelle route + méthode pour créer une nouvel article dans ma table existante article
+//   // je crée une nouvelle route + méthode pour créer une nouvel article dans ma table existante article
     /**
      * @Route("insert-article", name="insert_article")
      */
@@ -90,7 +90,6 @@ class ArticleController extends AbstractController
         dd($article1);
 
     }
-
     // je commente la première partie (ci-dessus) avec le fake tableau de db
     //je crée une nouvelle route article avec une nouvelle méthode associée => afficher article en fonction id
     // (en SQL = SELECT * FROM)
@@ -115,7 +114,6 @@ class ArticleController extends AbstractController
         $articlesList = $articlesRepository->findall();
 
         return $this->render("articlesList.html.twig", ["articlesList" => $articlesList]);
-
     }
 }
 

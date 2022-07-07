@@ -27,6 +27,7 @@ class CategoryController extends AbstractController
 
         dd($category);
     }
+
     /**
      * @Route ("category",name="category")
      */
