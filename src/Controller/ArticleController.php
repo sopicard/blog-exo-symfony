@@ -10,21 +10,6 @@ use App\Entity\Article;
 
 class ArticleController extends AbstractController
 {
-    // je commente la première partie (ci-dessous) avec le fake tableau de db
-    //je crée une nouvelle route article avec une nouvelle méthode associée => afficher article en fonction id
-    //je mets en paramètres de ma méthode une instance de classe ArticleRepository associée à var du même nom
-    //ce qui me permet de me servir des propriétés de la classe repository => récupération de données
-    // find => spécifique pour récup id
-    /**
-     * @Route("db-article", name="db_article")
-     */
-    public function showArticle(ArticleRepository $articleRepository)
-    {
-        $dbarticle = $articleRepositotry->find(1);
-
-        dd($dbarticle);
-    }
-
 //    /**
 //     * @Route("article/{id}", name="article")
 //     */
@@ -96,4 +81,30 @@ class ArticleController extends AbstractController
         dd($article);
     }
 
+    // je commente la première partie (ci-dessus) avec le fake tableau de db
+    //je crée une nouvelle route article avec une nouvelle méthode associée => afficher article en fonction id
+    // (en SQL = SELECT * FROM)
+    //je mets en paramètres de ma méthode une instance de classe ArticleRepository associée à var du même nom
+    //ce qui me permet de me servir des propriétés de la classe repository => récupération de données
+    // find => spécifique pour récup id
+    /**
+     * @Route("db-article", name="db_article")
+     */
+    public function showArticle(ArticleRepository $articleRepository)
+    {
+        $dbarticle = $articleRepository->find(1);
+
+        dd($dbarticle);
+    }
+
+    /**
+     * @Route("articles", name="articles")
+     */
+    public function showArticles(ArticleRepository $articlesRepository)
+    {
+        $articles = $articlesRepository->findall();
+
+        dd($articles);
+    }
 }
+

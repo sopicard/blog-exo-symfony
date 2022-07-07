@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ArticlesListRepository;
 
 class ArticlesListController extends AbstractController
 {
@@ -52,6 +53,5 @@ class ArticlesListController extends AbstractController
 //            ]
 //        ];
 //        return $this->render("articles_list.html.twig", ["articles_list" => $articles_list]);
-//    }
+    }
 
-}

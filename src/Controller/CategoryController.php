@@ -28,12 +28,22 @@ class CategoryController extends AbstractController
         dd($category);
     }
     /**
-     * @Route ("db-category",name="db_category")
+     * @Route ("category",name="category")
      */
     public function showCategory(CategoryRepository $categoryRepository)
     {
-        $dbcategory = $categoryRepository->find(1);
+        $category = $categoryRepository->find(1);
 
-        dd($dbcategory);
+        dd($category);
+    }
+
+    /**
+     * @Route("categories", name="categories")
+     */
+    public function showCategories(CategoryRepository $categoriesRepository)
+    {
+        $categories = $categoriesRepository->findall();
+
+        dd($categories);
     }
 }
