@@ -24,18 +24,18 @@ class CategoryController extends AbstractController
 
         $entityManager->persist($category);
         $entityManager->flush();
-
-        dd($category);
     }
 
     /**
-     * @Route ("category",name="category")
+     * @Route ("category/{id}",name="category")
      */
-    public function showCategory(CategoryRepository $categoryRepository)
+    public function showCategory($id, CategoryRepository $categoryRepository)
     {
-        $category = $categoryRepository->find(1);
+        $category = $categoryRepository->find($id);
 
-        dd($category);
+        return $this->render("category.html.twig", ["category" => $category]);
+
+
     }
 
     /**
@@ -45,6 +45,6 @@ class CategoryController extends AbstractController
     {
         $categories = $categoriesRepository->findall();
 
-        dd($categories);
+        return $this->render("categories.html.twig", ["categories" => $categories]);
     }
 }

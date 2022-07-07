@@ -11,8 +11,14 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
+    //autowiring of class ArticleRepository
     public function home(ArticleRepository $articleRepository)
     {
+        //inside findby method = (parameters to find last two articles)
+        $lastArticles = $articleRepository->findBy([], ["id"=> "DESC"], 2);
+        //new variable created to use variable $articleRepository who's content ArticleRepository properties
+        return $this->render("home.html.twig",["lastArticles" => $lastArticles]);
+
 //        $articlesList = [
 //            1 => [
 //                'id' => 1,
@@ -52,8 +58,5 @@ class HomeController extends AbstractController
 //            ]
 //        ];
 
-        $lastArticles = $articleRepository->findBy([], ["id"=> "DESC"], 2);
-
-        return $this->render("home.html.twig",["lastArticles" => $lastArticles]);
     }
 }

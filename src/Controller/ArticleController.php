@@ -99,7 +99,7 @@ class ArticleController extends AbstractController
     /**
      * @Route("article/{id}", name="article")
      */
-    public function showArticle(ArticleRepository $articleRepository,$id)
+    public function showArticle($id, ArticleRepository $articleRepository)
     {
         $article = $articleRepository->find($id);
 
@@ -116,4 +116,3 @@ class ArticleController extends AbstractController
         return $this->render("articlesList.html.twig", ["articlesList" => $articlesList]);
     }
 }
-
