@@ -24,18 +24,25 @@ body {
 .menu li {
     list-style-type: none;
     margin: 20px;
-
 }
 
-.menu a {
+.btn-home, .btn-list {
     text-decoration: none;
     border: 1px solid chocolate;
     border-radius: 15px;
     background-color: chocolate;
     padding: 10px;
     color: white;
-
 }
+
+ .btn-cat {
+    text-decoration: none;
+    border-radius: 15px;
+    padding: 10px;
+    color: white;
+    background-color:lightcoral;
+    border: 1px solid lightcoral;
+    }
 
 .container {
     display: flex;

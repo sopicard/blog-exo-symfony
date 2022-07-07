@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 
@@ -114,5 +115,22 @@ class ArticleController extends AbstractController
         $articlesList = $articlesRepository->findall();
 
         return $this->render("articlesList.html.twig", ["articlesList" => $articlesList]);
+    }
+    //méthode de suppression => mix Repository et Entity
+    /**
+     * @Route("articlesList/delete/{id}", name="delete_article")
+     */
+    public function deleteArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    {
+        $article=$articleRepository->find($id);
+    //ajout d'une condition pour article à supprimer et pour un déjà supprimé
+        if(!is_null($article)) {
+            $entityManager->remove($article);
+            $entityManager->flush();
+
+            return new Response("Removed !");
+        }else{
+            return new Response("Already removed !!");
+        }
     }
 }
