@@ -14,12 +14,13 @@ class ArticleController extends AbstractController
     //je crée une nouvelle route article avec une nouvelle méthode associée => afficher article en fonction id
     //je mets en paramètres de ma méthode une instance de classe ArticleRepository associée à var du même nom
     //ce qui me permet de me servir des propriétés de la classe repository => récupération de données
+    // find => spécifique pour récup id
     /**
      * @Route("db-article", name="db_article")
      */
-    public function showArticle(ArticleRepository $articleRepositotry)
+    public function showArticle(ArticleRepository $articleRepository)
     {
-        $dbarticle = $articleRepositotry->find(id:1);
+        $dbarticle = $articleRepositotry->find(1);
 
         dd($dbarticle);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,5 +26,14 @@ class CategoryController extends AbstractController
         $entityManager->flush();
 
         dd($category);
+    }
+    /**
+     * @Route ("db-category",name="db_category")
+     */
+    public function showCategory(CategoryRepository $categoryRepository)
+    {
+        $dbcategory = $categoryRepository->find(1);
+
+        dd($dbcategory);
     }
 }
