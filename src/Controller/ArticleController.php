@@ -88,23 +88,24 @@ class ArticleController extends AbstractController
     //ce qui me permet de me servir des propriétés de la classe repository => récupération de données
     // find => spécifique pour récup id
     /**
-     * @Route("db-article", name="db_article")
+     * @Route("article", name="article")
      */
     public function showArticle(ArticleRepository $articleRepository)
     {
-        $dbarticle = $articleRepository->find(1);
+        $article = $articleRepository->find(1);
 
-        dd($dbarticle);
+        return $this->render("article.html.twig", ["article" => $article]);
     }
 
     /**
-     * @Route("articles", name="articles")
+     * @Route("articles_list", name="articles_list")
      */
     public function showArticles(ArticleRepository $articlesRepository)
     {
-        $articles = $articlesRepository->findall();
+        $articles_list = $articlesRepository->findall();
 
-        dd($articles);
+        return $this->render("articles_list.html.twig", ["articles_list" => $articles_list]);
+
     }
 }
 

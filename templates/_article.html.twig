@@ -1,9 +1,8 @@
 {% if article.isPublished %}
     <article>
-        <img class= "photos" src="{{ article.image }}" alt="séquence de film">
-        <h2 class= "article-title">{{ article.title }}</h2>
-        <p class= "publication">{{ article.publishedAt|date("m/d/Y") }}</p>
+        <h2 class= "article-title">{{ article.titre }}</h2>
         <a href={{ path("article", {"id": article.id}) }}> Decriptif complet</a>
+        <p>{{ article.isPublished }}</p>
         <p class= "author">{{ article.author }}</p>
     </article>
 {% else %}
