@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Category;
 
+//Après avoir fait le CRUD avec ma classe category, modifications URL+name routes pour ajouter "admin"
+
 class AdminCategoryController extends AbstractController
 {
     /**
