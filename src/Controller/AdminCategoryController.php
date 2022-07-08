@@ -9,10 +9,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Category;
 
-class CategoryController extends AbstractController
+class AdminCategoryController extends AbstractController
 {
     /**
-     * @Route("insert_category", name="insert_category")
+     * @Route("/admin/insert_category", name="admin_insert_category")
      */
     public function insertCategory(EntityManagerInterface $entityManager)
     {
@@ -28,29 +28,29 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route ("category/{id}",name="category")
+     * @Route ("/admin/category/{id}",name="admin_category")
      */
     public function showCategory($id, CategoryRepository $categoryRepository)
     {
         $category = $categoryRepository->find($id);
 
-        return $this->render("category.html.twig", ["category" => $category]);
+        return $this->render("admin/category.html.twig", ["category" => $category]);
 
 
     }
 
     /**
-     * @Route("categories", name="categories")
+     * @Route("/admin/categories", name="admin_categories")
      */
     public function showCategories(CategoryRepository $categoriesRepository)
     {
         $categories = $categoriesRepository->findall();
 
-        return $this->render("categories.html.twig", ["categories" => $categories]);
+        return $this->render("admin/categories.html.twig", ["categories" => $categories]);
     }
 
     /**
-    * @Route("categories/delete/{id}", name="delete_category")
+    * @Route("/admin/categories/delete/{id}", name="admin_delete_category")
     */
     public function deleteCategory($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager)
     {
@@ -67,7 +67,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-    * @Route("categories/update/{id}", name="update_category")
+    * @Route("/admin/categories/update/{id}", name="admin_update_category")
     */
     public function updateCategory($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager)
     {

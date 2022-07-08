@@ -11,11 +11,11 @@ use App\Entity\Article;
 
 //Après avoir fait le CRUD avec ma classe article, modifications URL+name routes pour ajouter "admin"
 
-class ArticleController extends AbstractController
+class AdminArticleController extends AbstractController
 {
     // je crée une nouvelle route + méthode pour créer une nouvel article dans ma table existante article
     /**
-     * @Route("/admin/insert-article", name="admin_insert_article")
+     * @Route("/admin/insert_article", name="admin_insert_article")
      */
     public function insertArticle(EntityManagerInterface $entityManager)
     {
@@ -60,7 +60,7 @@ class ArticleController extends AbstractController
     {
         $article = $articleRepository->find($id);
 
-        return $this->render("article.html.twig", ["article" => $article]);
+        return $this->render("admin/article.html.twig", ["article" => $article]);
     }
 
     /**
@@ -70,7 +70,7 @@ class ArticleController extends AbstractController
     {
         $articlesList = $articlesRepository->findall();
 
-        return $this->render("articlesList.html.twig", ["articlesList" => $articlesList]);
+        return $this->render("admin/articlesList.html.twig", ["articlesList" => $articlesList]);
     }
     //méthode de suppression => mix Repository et Entity
     /**
