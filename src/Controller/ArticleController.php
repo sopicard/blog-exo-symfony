@@ -133,4 +133,20 @@ class ArticleController extends AbstractController
             return new Response("Already removed !!");
         }
     }
+    //méthode de mise à jour
+    /**
+     * @Route("articlesList/update/{id}", name="update_article")
+     */
+    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    {
+        $article=$articleRepository->find($id);
+        //les valeurs à modifier
+        $article->setTitle("title updated");
+        $article->setContent("test update");
+
+        $entityManager->persist($article);
+        $entityManager->flush();
+        //la réponse affichée sur le navigateur, en dur, sans modif twig.
+        return new Response ("Update performed");
+    }
 }
