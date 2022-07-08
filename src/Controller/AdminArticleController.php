@@ -35,19 +35,9 @@ class AdminArticleController extends AbstractController
         $entityManager->persist($article);
         $entityManager->flush();
 
-        $article1 = new Article();
-        $article1->setTitle("Bienvenue");
-        $article1->setIsPublished(true);
-        $article1->setAuthor("So");
-        $article1->setContent("Lorem ipsum");
-
-        $entityManager->persist($article1);
-        $entityManager->flush();
-
-        dd($article1);
+        return $this->redirectToRoute("admin_articlesList");
 
     }
-    // je commente la première partie (ci-dessus) avec le fake tableau de db
     //je crée une nouvelle route article avec une nouvelle méthode associée => afficher article en fonction id
     // (en SQL = SELECT * FROM)
     //je mets en paramètres de ma méthode une instance de classe ArticleRepository associée à var du même nom
@@ -72,7 +62,8 @@ class AdminArticleController extends AbstractController
 
         return $this->render("admin/articlesList.html.twig", ["articlesList" => $articlesList]);
     }
-    //méthode de suppression => mix Repository et Entity
+
+    //méthode de suppression => mix entre Repository et Entity
     /**
      * @Route("/admin/articlesList/delete/{id}", name="admin_delete_article")
      */
@@ -84,11 +75,12 @@ class AdminArticleController extends AbstractController
             $entityManager->remove($article);
             $entityManager->flush();
 
-            return new Response("Removed !");
+            return $this->redirectToRoute("admin_articlesList");
         }else{
             return new Response("Already removed !!");
         }
     }
+
     //méthode de mise à jour
     /**
      * @Route("/admin/articlesList/update/{id}", name="admin_update_article")

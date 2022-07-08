@@ -27,6 +27,8 @@ class AdminCategoryController extends AbstractController
 
         $entityManager->persist($category);
         $entityManager->flush();
+
+        return $this->redirectToRoute("admin_categories");
     }
 
     /**
@@ -37,8 +39,6 @@ class AdminCategoryController extends AbstractController
         $category = $categoryRepository->find($id);
 
         return $this->render("admin/category.html.twig", ["category" => $category]);
-
-
     }
 
     /**
@@ -59,13 +59,13 @@ class AdminCategoryController extends AbstractController
         $category = $categoryRepository->find($id);
 
         if(!is_null($category)) {
-        $entityManager->remove($category);
-        $entityManager->flush();
+            $entityManager->remove($category);
+            $entityManager->flush();
 
-        return new Response("Removed !");
-    }else{
-        return new Response("Already removed !!");
-    }
+            return $this->redirectToRoute("admin_categories");
+        }else{
+            return new Response("Already removed !!");
+        }
     }
 
     /**
@@ -79,7 +79,7 @@ class AdminCategoryController extends AbstractController
 
         $entityManager->persist($category);
         $entityManager->flush();
-        //la réponse affichée sur le navigateur, en dur, sans modif twig.
-        return new Response("Update category performed");
+
+        return new Response("Updated !");
     }
 }

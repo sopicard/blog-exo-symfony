@@ -37,17 +37,20 @@ body {
 
  .btn-cat {
     text-decoration: none;
+    border: 1px solid peru;
     border-radius: 15px;
+    background-color: peru;
     padding: 10px;
     color: white;
-    background-color:lightcoral;
-    border: 1px solid lightcoral;
     }
 
 .container {
     display: flex;
     padding: 2%;
 
+}
+.insert {
+    padding:1%;
 }
 article {
     text-align: center;
@@ -64,9 +67,13 @@ article h2,a,p {
     padding-bottom: 3%;
 }
 
-article a {
+article a, .btn-insert {
     text-decoration: none;
-    color : black;
+    border: 1px solid chocolate;
+    border-radius: 15px;
+    background-color: antiquewhite;
+    padding: 3px;
+    color: chocolate;
 }
 
 .author {

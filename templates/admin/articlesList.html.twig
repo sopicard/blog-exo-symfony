@@ -5,9 +5,21 @@
 {% endblock %}
 
 {% block main %}
+   <section class="insert">
+       <a class="btn-insert" href={{ path("admin_insert_article") }}>Ajouter un article</a>
+   </section>
    <section class= "container">
           {% for article in articlesList  %}
-                 {% include "admin/_article.html.twig" %}
+              {% if article.isPublished %}
+                  <article>
+                      <h2 class= "article-title">{{ article.title }}</h2>
+                      <a href={{ path("admin_article", {"id": article.id}) }}>Cliquez ici</a>
+                      <a href={{ path("admin_delete_article", {"id": article.id}) }}> Supprimez ici</a>
+                      <p class= "author">{{ article.author }}</p>
+                  </article>
+              {% else %}
+                  <p> L'article n'est pas publié </p>
+              {% endif %}
           {% endfor %}
    </section>
 {% endblock %}

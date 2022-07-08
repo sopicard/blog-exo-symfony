@@ -5,7 +5,17 @@
 {% endblock %}
 
 {%  block main %}
-    {% include "admin/_article.html.twig" %}
+    {% if article.isPublished %}
+        <article>
+            <h2 class= "article-title">{{ article.title }}</h2>
+            <p>{{ article.content }}</p>
+            <a href={{ path("admin_article", {"id": article.id}) }}>Cliquez ici</a>
+            <a href={{ path("admin_delete_article", {"id": article.id}) }}> Supprimez ici</a>
+            <p class= "author">{{ article.author }}</p>
+        </article>
+    {% else %}
+        <p> L'article n'est pas publié </p>
+    {% endif %}
 {% endblock %}
 
 {% block footer %}
