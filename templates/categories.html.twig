@@ -4,7 +4,7 @@
         {% for category in categories  %}
             <article>
                 <h2 style="color: {{ category.color }}">{{ category.title }}</h2>
-                <a href="{{ path("category",{"id":category.id}) }}">Clique sur le fruit de ton choix</a>
+                <a href="{{ path("category",{"id":category.id}) }}">Clique ici pour choisir ce fruit</a>
             </article>
         {% endfor %}
 

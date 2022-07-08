@@ -2,7 +2,7 @@
     <article>
         <h2 class= "article-title">{{ article.title }}</h2>
         <p>{{ article.content }}</p>
-        <a href={{ path("article", {"id": article.id}) }}>Cliquez ici</a>
+        <a href={{ path("admin_article", {"id": article.id}) }}>Cliquez ici</a>
         <p>{{ article.isPublished }}</p>
         <p class= "author">{{ article.author }}</p>
     </article>
