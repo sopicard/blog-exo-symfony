@@ -43,7 +43,14 @@ body {
     padding: 10px;
     color: white;
     }
-
+.mess-success {
+    color:darkolivegreen;
+    text-transform: uppercase;
+}
+.mess-error {
+    color: orangered;
+    text-transform: uppercase;
+}
 .container {
     display: flex;
     padding: 2%;

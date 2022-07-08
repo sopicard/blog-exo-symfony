@@ -35,6 +35,9 @@ class AdminArticleController extends AbstractController
         $entityManager->persist($article);
         $entityManager->flush();
 
+        //function créer message flash (héritage AbstractController)
+        $this->addFlash("success", "Votre article a bien été ajouté !");
+
         return $this->redirectToRoute("admin_articlesList");
 
     }
@@ -75,10 +78,12 @@ class AdminArticleController extends AbstractController
             $entityManager->remove($article);
             $entityManager->flush();
 
-            return $this->redirectToRoute("admin_articlesList");
+            $this->addFlash("success","Cet article est bien supprimé !");
         }else{
-            return new Response("Already removed !!");
+            $this->addFlash("error","Cet article est déjà supprimé !");
+
         }
+        return $this->redirectToRoute("admin_articlesList");
     }
 
     //méthode de mise à jour

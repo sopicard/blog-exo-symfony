@@ -28,6 +28,14 @@
     </nav>
 </header>
 
+{% for message in app.flashes('success') %}
+    <p class="mess-success">{{ message }}</p>
+{% endfor %}
+{% for message in app.flashes('error') %}
+    <p class="mess-error">{{ message }}</p>
+
+{% endfor %}
+
 <main>
 
     {% block main %}

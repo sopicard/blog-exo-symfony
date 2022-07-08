@@ -28,6 +28,9 @@ class AdminCategoryController extends AbstractController
         $entityManager->persist($category);
         $entityManager->flush();
 
+        //function créer message flash (héritage AbstractController)
+        $this->addFlash("success", "Votre catégorie a bien été ajoutée !");
+
         return $this->redirectToRoute("admin_categories");
     }
 
@@ -62,10 +65,13 @@ class AdminCategoryController extends AbstractController
             $entityManager->remove($category);
             $entityManager->flush();
 
-            return $this->redirectToRoute("admin_categories");
+            $this->addFlash("success","Cet article est bien supprimé !");
+
         }else{
-            return new Response("Already removed !!");
+            $this->addFlash("error","Cet article est déjà supprimée !");
+
         }
+        return $this->redirectToRoute("admin_categories");
     }
 
     /**
