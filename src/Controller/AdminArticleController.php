@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,34 +21,48 @@ class AdminArticleController extends AbstractController
      */
     public function insertArticle(EntityManagerInterface $entityManager, Request $request)
     {
-        $title = $request->query->get("title");
-        $content = $request->query->get("content");
-        $author = $request->query->get("author");
+        // 2- version "magique" de création de formulaire Symfony :
+        //création instance classe Article pour créer nouvel article dans db
+        $article = new Article ();
 
-        if(!empty($title) && !empty($content)){
+        //Grâce à la classe ArticleType (crée via ligne commande) j'ai un "patron" de formulaire
+        // qui me sert de modèle pour créer les articles. Ensuite en utilisant la méthode createForm,
+        //je crée le formulaire en utilisant instance de classe ArticleType qui est mon modèle de base
+        $form = $this->createForm(ArticleType::class, $article);
 
-            // je crée une variable dans laquelle je mets une nouvelle instance de mon entité Article
-            $article = new Article();
-            // et je définis les nouvelles données grâce à l'instance de classe que j'ai appelée au-dessus
-            $article->setTitle($title);
-            $article->setIsPublished(true);
-            $article->setAuthor($author);
-            $article->setContent($content);
-            //ensuite je vais créer une var entityManager contenant
-            // l'instance de classe EntityManagerInterface
-            // le tout mis en paramètres de ma fonction insertArticle(version raccourcie du mot clé "new")
-
-            //pour finir je pré enregistre mon nouvel article avec la fonction persist
-            //et je l'envoie à la db avec la fonction flush
-            $entityManager->persist($article);
-            $entityManager->flush();
-        }
-        //function créer message flash (héritage AbstractController)
-        $this->addFlash("success", "Votre article a bien été ajouté !");
-
-        return $this->redirectToRoute("admin_articlesList");
+        //j'affiche le twig (créer au préalable en version insert) avec la variable form qui contient la vue du formulaire
+        return $this->render("admin/insert_article.html.twig", ["form"=>$form->createView()]);
 
     }
+          // 1- version de création de formulaire "à la main" dans la public function ci-dessus :
+//        $title = $request->query->get("title");
+//        $content = $request->query->get("content");
+//        $author = $request->query->get("author");
+//
+//        if(!empty($title) && !empty($content)){
+//
+//            // je crée une variable dans laquelle je mets une nouvelle instance de mon entité Article
+//            $article = new Article();
+//            // et je définis les nouvelles données grâce à l'instance de classe que j'ai appelée au-dessus
+//            $article->setTitle($title);
+//            $article->setIsPublished(true);
+//            $article->setAuthor($author);
+//            $article->setContent($content);
+//            //ensuite je vais créer une var entityManager contenant
+//            // l'instance de classe EntityManagerInterface
+//            // le tout mis en paramètres de ma fonction insertArticle(version raccourcie du mot clé "new")
+//
+//            //pour finir je pré enregistre mon nouvel article avec la fonction persist
+//            //et je l'envoie à la db avec la fonction flush
+//            $entityManager->persist($article);
+//            $entityManager->flush();
+//        }
+//        //function créer message flash (héritage AbstractController)
+//        $this->addFlash("success", "Votre article a bien été ajouté !");
+//
+//        return $this->redirectToRoute("admin_articlesList");
+//
+//    }
     //je crée une nouvelle route article avec une nouvelle méthode associée => afficher article en fonction id
     // (en SQL = SELECT * FROM)
     //je mets en paramètres de ma méthode une instance de classe ArticleRepository associée à var du même nom
@@ -108,5 +123,7 @@ class AdminArticleController extends AbstractController
         $entityManager->flush();
         //la réponse affichée sur le navigateur, en dur, sans modif twig.
         return new Response ("Update performed");
+
     }
 }
+

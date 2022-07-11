@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,29 +19,41 @@ class AdminCategoryController extends AbstractController
      * @Route("/admin/insert_category", name="admin_insert_category")
      */
     public function insertCategory(EntityManagerInterface $entityManager,Request $request)
-    {
-        //création form dans twig. Instance de classe Request + use.
-        $title = $request->query->get("title");
-        $color = $request->query->get("color");
-        $description = $request->query->get("description");
-        //condition pour que l'envoi soit validé : si titre et color ne sont pas vides (pour ne pas créer des champs vides)
-        // alors { ...
-        if(!empty($title) && !empty($color)) {
+    {   // 2- version "magique" de création de formulaire Symfony :
+        //création instance classe Category pour créer nouvelle catégorie dans db
+        $category = new Category();
 
-            $category = new Category();
-            // seront affichées les valeurs du formulaire récupérées grâce à la fonction Set
-            $category->setTitle($title);
-            $category->setIsPublished(true);
-            $category->setColor($color);
-            $category->setDescription($description);
+        //Grâce à la classe CategoryType (crée via ligne commande) j'ai un "patron" de formulaire
+        // qui me sert de modèle pour créer les catégories. Ensuite en utilisant la méthode createForm,
+        //je crée le formulaire en utilisant instance de classe CategoryType qui est mon modèle de base
+        $form = $this->createForm(CategoryType::class, $category);
 
-            $entityManager->persist($category);
-            $entityManager->flush();
-        }
-        //function créer message flash (héritage AbstractController)
-        $this->addFlash("success", "Votre catégorie a bien été ajoutée !");
+        //j'affiche le twig (créer au préalable en version insert) avec la variable form qui contient la vue du formulaire
+        return $this->render("admin/insert_category.html.twig", ["form"=>$form->createView()]);
 
-        return $this->redirectToRoute("admin_categories");
+          // 1- version de création de formulaire "à la main" dans la public function ci-dessus :
+//        //création form dans twig. Instance de classe Request + use.
+//        $title = $request->query->get("title");
+//        $color = $request->query->get("color");
+//        $description = $request->query->get("description");
+//        //condition pour que l'envoi soit validé : si titre et color ne sont pas vides (pour ne pas créer des champs vides)
+//        // alors { ...
+//        if(!empty($title) && !empty($color)) {
+//
+//            $category = new Category();
+//            //Grâce aux fonctions Set de l'entite Category, possible d'insérer valeurs dans formulaire qui seront enregistrées dans la db.
+//            $category->setTitle($title);
+//            $category->setIsPublished(true);
+//            $category->setColor($color);
+//            $category->setDescription($description);
+//
+//            $entityManager->persist($category);
+//            $entityManager->flush();
+//        }
+//        //function créer message flash (héritage AbstractController)
+//        $this->addFlash("success", "Votre catégorie a bien été ajoutée !");
+//
+//        return $this->redirectToRoute("admin_categories");
     }
 
     /**
