@@ -28,6 +28,20 @@ class AdminCategoryController extends AbstractController
         //je crée le formulaire en utilisant instance de classe CategoryType qui est mon modèle de base
         $form = $this->createForm(CategoryType::class, $category);
 
+        //on donne à la var form (qui contient formulaire) une instance de la classe request (déclarée en param de ma fonction au-dessus)
+        //afin que le formulaire puisse récup ttes données entrées dans les inputs. les set sur $category
+        //se font auto grâce à new Category au-dessus.
+        $form->handleRequest($request);
+
+        // si form posté && données valides (ex: pas de caractères type string dans date)
+        if($form->isSubmitted() && $form->isValid()){
+            ////pré enregistrement et envoi pour enregistrement ok
+            $entityManager->persist($category);
+            $entityManager->flush();
+
+            $this->addFlash("success", " Catégorie enregistré ! ");
+        }
+
         //j'affiche le twig (créer au préalable en version insert) avec la variable form qui contient la vue du formulaire
         return $this->render("admin/insert_category.html.twig", ["form"=>$form->createView()]);
 
