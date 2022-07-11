@@ -23,11 +23,12 @@ class AdminCategoryController extends AbstractController
         $title = $request->query->get("title");
         $color = $request->query->get("color");
         $description = $request->query->get("description");
-        //condition pour inscrire nelles données
+        //condition pour que l'envoi soit validé : si titre et color ne sont pas vides (pour ne pas créer des champs vides)
+        // alors { ...
         if(!empty($title) && !empty($color)) {
 
             $category = new Category();
-
+            // seront affichées les valeurs du formulaire récupérées grâce à la fonction Set
             $category->setTitle($title);
             $category->setIsPublished(true);
             $category->setColor($color);
@@ -73,10 +74,10 @@ class AdminCategoryController extends AbstractController
             $entityManager->remove($category);
             $entityManager->flush();
 
-            $this->addFlash("success","Cet article est bien supprimé !");
+            $this->addFlash("success","Cet catégorie est bien supprimée !");
 
         }else{
-            $this->addFlash("error","Cet article est déjà supprimée !");
+            $this->addFlash("error","Cet catégorie est déjà supprimée !");
 
         }
         return $this->redirectToRoute("admin_categories");

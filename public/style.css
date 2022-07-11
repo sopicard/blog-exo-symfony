@@ -5,6 +5,7 @@
 }
 body {
     font-family: Calibri;
+    margin: 2%;
 }
 .main-title {
     text-align: center;
@@ -15,6 +16,7 @@ body {
 .navbar {
     background-color: antiquewhite;
 }
+
 .menu {
     display: flex;
     justify-content: flex-end;
@@ -44,12 +46,14 @@ body {
     color: white;
     }
 .mess-success {
-    color:darkolivegreen;
+    color:chocolate;
     text-transform: uppercase;
+    font-weight: bold;
 }
 .mess-error {
     color: orangered;
     text-transform: uppercase;
+    font-weight: bold;
 }
 .container {
     display: flex;
@@ -65,9 +69,6 @@ article {
 }
 article h2 {
     text-transform: uppercase;
-}
-.photos{
-    width: 50%;
 }
 
 article h2,a,p {
@@ -87,6 +88,50 @@ article a, .btn-insert {
     font-weight: bold;
     padding-top: 2%;
     text-transform: uppercase;
+}
+
+form {
+    background-color:antiquewhite;
+    padding:10px;
+    width:280px;
+    text-align: center;
+}
+fieldset {
+    padding:0 20px 20px 20px;
+    margin-bottom:10px;
+    border:1px solid chocolate;
+}
+legend {
+    color:chocolate;
+    font-weight:bold
+}
+
+label {
+    color: chocolate;
+    margin-top:10px;
+    display:block;
+}
+label.inline {
+    display:inline;
+    margin-right:50px;
+}
+input, textarea, select {
+    padding:3px;
+    margin-bottom: 10px;
+    border:1px solid chocolate;
+    border-radius:5px;
+    width:200px;
+    box-shadow:1px 1px 2px #C0C0C0 inset;
+}
+select {
+    margin-top:10px;
+}
+input[type=submit]{
+    width:100px;
+    margin-left:5px;
+    box-shadow:1px 1px 1px chocolate;
+    cursor:pointer;
+    color: chocolate;
 }
 
 footer {
