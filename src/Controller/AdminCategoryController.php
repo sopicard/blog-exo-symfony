@@ -113,15 +113,32 @@ class AdminCategoryController extends AbstractController
     /**
     * @Route("/admin/categories/update/{id}", name="admin_update_category")
     */
-    public function updateCategory($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager)
+    public function updateCategory($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, Request $request)
     {
         $category=$categoryRepository->find($id);
 
-        $category->setDescription("test update");
+        $form = $this->createForm(CategoryType::class, $category);
 
-        $entityManager->persist($category);
-        $entityManager->flush();
+        $form->handleRequest($request);
 
-        return new Response("Updated !");
+        if($form->isSubmitted() && $form->isValid()){
+
+            $entityManager->persist($category);
+            $entityManager->flush();
+
+            $this->addFlash("success", " Catégorie modifiée ! ");
+        }
+
+        //j'affiche le twig (créer au préalable en version insert) avec la variable form qui contient la vue du formulaire
+        return $this->render("admin/update_category.html.twig", ["form"=>$form->createView()]);
+
+
+
+//        $category->setDescription("test update");
+//
+//        $entityManager->persist($category);
+//        $entityManager->flush();
+//
+//        return new Response("Updated !");
     }
 }

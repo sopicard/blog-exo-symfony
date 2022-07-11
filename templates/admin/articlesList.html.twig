@@ -15,6 +15,7 @@
                       <h2 class= "article-title">{{ article.title }}</h2>
                       <a href={{ path("admin_article", {"id": article.id}) }}>Cliquez ici</a>
                       <a href={{ path("admin_delete_article", {"id": article.id}) }}> Supprimez ici</a>
+                      <a href={{ path("admin_update_article", {"id": article.id}) }}> Modifiez ici</a>
                       <p class= "author">{{ article.author }}</p>
                   </article>
               {% else %}

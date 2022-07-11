@@ -10,6 +10,7 @@
             <h2 style="color: {{ category.color }}">{{ category.title }}</h2>
             <a href="{{ path("admin_category",{"id":category.id}) }}">Clique ici pour choisir ce fruit</a>
             <a href="{{ path("admin_delete_category",{"id":category.id}) }}">Supprimez ici votre fruit</a>
+            <a href={{ path("admin_update_category", {"id": category.id}) }}> Modifiez ici</a>
         </article>
     </section>
     {% endfor %}

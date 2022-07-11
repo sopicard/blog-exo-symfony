@@ -126,17 +126,35 @@ class AdminArticleController extends AbstractController
     /**
      * @Route("/admin/articlesList/update/{id}", name="admin_update_article")
      */
-    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request)
     {
         $article=$articleRepository->find($id);
-        //les valeurs à modifier
-        $article->setTitle("title updated");
-        $article->setContent("test update");
 
-        $entityManager->persist($article);
-        $entityManager->flush();
-        //la réponse affichée sur le navigateur, en dur, sans modif twig.
-        return new Response ("Update performed");
+        $form = $this->createForm(ArticleType::class, $article);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $entityManager->persist($article);
+            $entityManager->flush();
+
+            $this->addFlash("success", " Article modifié ! ");
+        }
+
+        return $this->render("admin/update_article.html.twig", ["form"=>$form->createView()]);
+
+
+//        //Modif des données en dur : exercice initial
+//
+//        //les valeurs à modifier
+//        $article->setTitle("title updated");
+//        $article->setContent("test update");
+//
+//        $entityManager->persist($article);
+//        $entityManager->flush();
+//        //la réponse affichée sur le navigateur, en dur, sans modif twig.
+//        return new Response ("Update performed");
 
     }
 }
