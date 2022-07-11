@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Category;
+use Symfony\Component\HttpFoundation\Request;
 
 //Après avoir fait le CRUD avec ma classe category, modifications URL+name routes pour ajouter "admin"
 
@@ -16,18 +17,25 @@ class AdminCategoryController extends AbstractController
     /**
      * @Route("/admin/insert_category", name="admin_insert_category")
      */
-    public function insertCategory(EntityManagerInterface $entityManager)
+    public function insertCategory(EntityManagerInterface $entityManager,Request $request)
     {
-        $category = new Category();
+        //création form dans twig. Instance de classe Request + use.
+        $title = $request->query->get("title");
+        $color = $request->query->get("color");
+        $description = $request->query->get("description");
+        //condition pour inscrire nelles données
+        if(!empty($title) && !empty($color)) {
 
-        $category->setTitle("New title");
-        $category->setIsPublished(true);
-        $category->setColor("New color");
-        $category->setDescription("Lorem ipsum");
+            $category = new Category();
 
-        $entityManager->persist($category);
-        $entityManager->flush();
+            $category->setTitle($title);
+            $category->setIsPublished(true);
+            $category->setColor($color);
+            $category->setDescription($description);
 
+            $entityManager->persist($category);
+            $entityManager->flush();
+        }
         //function créer message flash (héritage AbstractController)
         $this->addFlash("success", "Votre catégorie a bien été ajoutée !");
 

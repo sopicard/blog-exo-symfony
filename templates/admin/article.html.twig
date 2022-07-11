@@ -6,13 +6,31 @@
 
 {%  block main %}
     {% if article.isPublished %}
-        <article>
-            <h2 class= "article-title">{{ article.title }}</h2>
-            <p>{{ article.content }}</p>
-            <a href={{ path("admin_article", {"id": article.id}) }}>Cliquez ici</a>
-            <a href={{ path("admin_delete_article", {"id": article.id}) }}> Supprimez ici</a>
-            <p class= "author">{{ article.author }}</p>
-        </article>
+        <section class="category">
+            <article>
+                <h2 class= "article-title">{{ article.title }}</h2>
+                <p>{{ article.content }}</p>
+                <a href={{ path("admin_article", {"id": article.id}) }}>Cliquez ici</a>
+                <a href={{ path("admin_delete_article", {"id": article.id}) }}> Supprimez ici</a>
+                <p class= "author">{{ article.author }}</p>
+            </article>
+        </section>
+
+        <section class="category">
+        <form action="{{ path("admin_insert_article") }}" method="get">
+
+            <label for="title">Titre</label>
+            <input type="text" name="title">
+
+            <label for="content">Contenu</label>
+            <input type="text" name="content">
+
+            <label for="author">Auteur</label>
+            <input type="text" name="author">
+
+            <input type="submit">
+        </form>
+        </section>
     {% else %}
         <p> L'article n'est pas publié </p>
     {% endif %}

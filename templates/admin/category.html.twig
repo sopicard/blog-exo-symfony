@@ -5,4 +5,18 @@
             <h2 style="color: {{ category.color }}">{{ category.title }}</h2>
             <p>{{ category.description }}</p>
         </article>
+
+        <form action="{{ path("admin_insert_category") }}" method="get">
+
+            <label for="title">Titre</label>
+            <input type="text" name="title">
+
+            <label for="color">Couleur</label>
+            <input type="text" name="color">
+
+            <label for="description">Description</label>
+            <input type="text" name="description">
+
+            <input type="submit">
+        </form>
 {% endblock %}

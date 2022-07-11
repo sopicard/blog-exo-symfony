@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
+use Symfony\Component\HttpFoundation\Request;
 
 //Après avoir fait le CRUD avec ma classe article, modifications URL+name routes pour ajouter "admin"
 
@@ -17,24 +18,30 @@ class AdminArticleController extends AbstractController
     /**
      * @Route("/admin/insert_article", name="admin_insert_article")
      */
-    public function insertArticle(EntityManagerInterface $entityManager)
+    public function insertArticle(EntityManagerInterface $entityManager, Request $request)
     {
-        // je crée une variable dans laquelle je mets une nouvelle instance de mon entité Article
-        $article = new Article();
-        // et je définis les nouvelles données grâce à l'instance de classe que j'ai appelée au-dessus
-        $article->setTitle("Nouveau titre");
-        $article->setIsPublished(true);
-        $article->setAuthor("Nouvel auteur");
-        $article->setContent("Lorem ipsum");
-        //ensuite je vais créer une var entityManager contenant
-        // l'instance de classe EntityManagerInterface
-        // le tout mis en paramètres de ma fonction insertArticle(version raccourcie du mot clé "new")
+        $title = $request->query->get("title");
+        $content = $request->query->get("content");
+        $author = $request->query->get("author");
 
-        //pour finir je pré enregistre mon nouvel article avec la fonction persist
-        //et je l'envoie à la db avec la fonction flush
-        $entityManager->persist($article);
-        $entityManager->flush();
+        if(!empty($title) && !empty($content)){
 
+            // je crée une variable dans laquelle je mets une nouvelle instance de mon entité Article
+            $article = new Article();
+            // et je définis les nouvelles données grâce à l'instance de classe que j'ai appelée au-dessus
+            $article->setTitle($title);
+            $article->setIsPublished(true);
+            $article->setAuthor($author);
+            $article->setContent($content);
+            //ensuite je vais créer une var entityManager contenant
+            // l'instance de classe EntityManagerInterface
+            // le tout mis en paramètres de ma fonction insertArticle(version raccourcie du mot clé "new")
+
+            //pour finir je pré enregistre mon nouvel article avec la fonction persist
+            //et je l'envoie à la db avec la fonction flush
+            $entityManager->persist($article);
+            $entityManager->flush();
+        }
         //function créer message flash (héritage AbstractController)
         $this->addFlash("success", "Votre article a bien été ajouté !");
 
