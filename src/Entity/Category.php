@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+
 
 // table générée via cmder
 //php bin/console make:entity
@@ -40,6 +42,35 @@ class Category
      * @ORM\Column(type="boolean")
      */
     private $isPublished;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
+     */
+    private $articles;
+
+    // Création relation category->articles donc OneToMany
+    //fonction __construct s'executera en tout début de code :
+    //ici je spécifie que $articles devient 1 tableau mais je pourai aussi mettre d'autres valeurs par défaut
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * @param ArrayCollection $articles
+     */
+    public function setArticles($articles): void
+    {
+        $this->articles = $articles;
+    }
 
     public function getId(): ?int
     {

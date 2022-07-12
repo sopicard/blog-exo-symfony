@@ -3,7 +3,10 @@
 {% block main %}
     <section>
         <article>
-            <h2 style="color: {{ category.color }}">{{ category.title }}</h2>
+            <h2 style="color: {{ category.color }};">{{ category.title }}</h2>
+            {% for article in category.articles %}
+                <p>{{ article.title }}</p>
+            {% enfor %}
             <p>{{ category.description }}</p>
         </article>
 
