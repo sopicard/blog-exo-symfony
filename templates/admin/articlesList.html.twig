@@ -13,6 +13,12 @@
               {% if article.isPublished %}
                   <article>
                       <h2 class= "article-title">{{ article.title }}</h2>
+                      {# si lien article/catégorie existe #}
+                      {% if article.category %}
+                        <p>{{ article.category.title }}</p>
+                      {% else %}
+                          <p>Catégorie inexistante</p>
+                      {% endif %}
                       <p class= "author">{{ article.author }}</p>
                       <a href={{ path("admin_article", {"id": article.id}) }}>Cliquez ici</a>
                       <a href={{ path("admin_delete_article", {"id": article.id}) }}> Supprimez ici</a>

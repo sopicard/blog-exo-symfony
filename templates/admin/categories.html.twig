@@ -8,15 +8,15 @@
     <section class="insert">
         <a class="btn-insert" href={{ path("admin_insert_category") }}>Ajouter une catégorie</a>
     </section>
-    {% for category in categories  %}
     <section class="container">
-        <article>
-            <h2 style="color: {{ category.color }}">{{ category.title }}</h2>
-            <a href="{{ path("admin_category",{"id":category.id}) }}">Cliquez ici</a>
-            <a href="{{ path("admin_delete_category",{"id":category.id}) }}">Supprimez ici</a>
-            <a href="{{ path("admin_update_category", {"id": category.id}) }}"> Modifiez ici</a>
-        </article>
+        {% for category in categories  %}
+            <article>
+                <h2 style="color: {{ category.color }}">{{ category.title }}</h2>
+                <a href="{{ path("admin_category",{"id":category.id}) }}">Cliquez ici</a>
+                <a href="{{ path("admin_delete_category",{"id":category.id}) }}">Supprimez ici</a>
+                <a href="{{ path("admin_update_category", {"id": category.id}) }}"> Modifiez ici</a>
+            </article>
+        {% endfor %}
     </section>
-    {% endfor %}
 {% endblock %}
 

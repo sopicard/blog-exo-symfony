@@ -37,6 +37,29 @@ class Article
      */
     private $content;
 
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category): void
+    {
+        $this->category = $category;
+    }
+    //j'ajoute moi-même le lien entre article et catégorie
+    //pour articles = 1 seule cat
+    //pour cat = plusieurs articles
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     */
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
