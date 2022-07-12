@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
+    <section>
         <article>
             <h2 style="color: {{ category.color }}">{{ category.title }}</h2>
             <p>{{ category.description }}</p>
@@ -19,4 +20,5 @@
 
             <input type="submit">
         </form>
+    </section>
 {% endblock %}

@@ -6,13 +6,13 @@
 
 {%  block main %}
     {% if article.isPublished %}
-        <section>
+        <section class="container">
             <article>
                 <h2 class= "article-title">{{ article.title }}</h2>
                 <p>{{ article.content }}</p>
+                <p class= "author">{{ article.author }}</p>
                 <a href={{ path("admin_article", {"id": article.id}) }}>Cliquez ici</a>
                 <a href={{ path("admin_delete_article", {"id": article.id}) }}> Supprimez ici</a>
-                <p class= "author">{{ article.author }}</p>
             </article>
         </section>
 

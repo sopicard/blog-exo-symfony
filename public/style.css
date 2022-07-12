@@ -3,16 +3,19 @@
     padding:0;
     box-sizing: border-box;
 }
+
 body {
     font-family: Calibri;
     margin: 2%;
 }
+
 .main-title {
     text-align: center;
     background-color: antiquewhite;
     text-transform: uppercase;
     color : chocolate;
 }
+
 .navbar {
     background-color: antiquewhite;
 }
@@ -28,20 +31,20 @@ body {
     margin: 20px;
 }
 
-.btn-home, .btn-list {
+.btn-home {
     text-decoration: none;
-    border: 1px solid chocolate;
+    border: 1px solid peru;
     border-radius: 15px;
-    background-color: chocolate;
+    background-color:peru;
     padding: 10px;
     color: white;
 }
 
- .btn-cat {
+ .btn-cat, .btn-list {
     text-decoration: none;
-    border: 1px solid peru;
+    border: 1px solid chocolate;
     border-radius: 15px;
-    background-color: peru;
+    background-color: chocolate;
     padding: 10px;
     color: white;
     }
@@ -57,15 +60,17 @@ body {
 }
 .container {
     display: flex;
-    padding: 2%;
-
+    justify-content: center;
+    padding: 1%;
 }
 .insert {
     padding:1%;
 }
 article {
+    display: flex;
+    flex-direction: column;
     text-align: center;
-    padding: 2%;
+    padding:2%;
 }
 article h2 {
     text-transform: uppercase;
@@ -83,7 +88,10 @@ article a, .btn-insert {
     padding: 3px;
     color: chocolate;
 }
-
+article a{
+    padding:5px;
+    margin-top: 5px;
+}
 .author {
     font-weight: bold;
     padding-top: 2%;
