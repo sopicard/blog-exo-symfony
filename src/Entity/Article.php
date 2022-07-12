@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
 //je crée une entité (avec une class) et je m'assure que le use associé est présent
+
+//lorsque l'on crée une entité penser à mettre la classe en repository correspondante
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  */

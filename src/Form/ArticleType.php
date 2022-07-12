@@ -18,9 +18,9 @@ class ArticleType extends AbstractType
             //génère l'input pour le title avec valeur par défaut.
             //Si je souhaite par ex un text area, il faudra que je le rajoute moi-même
             ->add('title')
+            ->add('content')
             ->add('isPublished')
             ->add('author')
-            ->add('content')
             //ajout d'un champ pour gérer le choix de la cat voulue pour l'article.
             // dont le type est Entity parce que ?
             ->add("category",EntityType::class, [

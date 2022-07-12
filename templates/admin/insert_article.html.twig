@@ -2,7 +2,33 @@
 
 {% block main %}
         {# ici la fonction twig form permet de créer tous les inputs et labels de mon formulaire #}
-        {{ form(form) }}
+        {# {{ form(form) }} #}
+        {# je redécoupe mon formulaire pour mise en forme + esthétique avec bootstrap  #}
+        {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-article-title-label'}}) }}
+                {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.content,'Contenu', {'label_attr': {'class': 'form-content-label' }}) }}
+                {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.isPublished,'Est publié', {'label_attr': {'class': 'form-isPublished-label' }}) }}
+                {{ form_widget(form.isPublished, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.category,'Categorie', {'label_attr': {'class': 'form-categorie-label' }}) }}
+                {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.author,'Auteur', {'label_attr': {'class': 'form-author-label' }}) }}
+                {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+
+                {{ form_end(form) }}
 
 {% endblock %}
 

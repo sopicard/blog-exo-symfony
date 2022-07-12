@@ -1,8 +1,26 @@
 {%  extends "base.html.twig" %}
 
 {% block main %}
-    {# ici la fonction twig form associée à la variable form permet de créer
-    tous les inputs et labels de mon formulaire #}
-    {{ form(form) }}
+
+    {# ici la fonction twig form permet de créer tous les inputs et labels de mon formulaire #}
+    {# {{ form(form) }} #}
+    {# je redécoupe mon formulaire pour mise en forme + esthétique avec bootstrap  #}
+    {{ form_start(form) }}
+
+    {{ form_label(form.title) }}
+    {{ form_widget(form.title) }}
+
+    {{ form_label(form.color) }}
+    {{ form_widget(form.color) }}
+
+    {{ form_label(form.description) }}
+    {{ form_widget(form.description) }}
+
+    {{ form_label(form.isPublished) }}
+    {{ form_widget(form.isPublished) }}
+
+    {{ form_widget(form.submit) }}
+
+    {{ form_end(form) }}
 
 {% endblock %}
