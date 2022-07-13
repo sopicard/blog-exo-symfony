@@ -63,4 +63,28 @@ class ArticleRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function searchByWord($search)
+    {
+        //$word = "fruit"; =>
+        //->Lire les commentaires avec cette variable (valeur en dur) pour l'exercice.
+        //Mais pour pouvoir récup ce qui sera inscrit dans le formulaire on remplace la variable $word
+        //par $search en la passant dans les param de la fonction juste au-dessus et à l'intérieur des %
+
+        //->le QueryBuilder = constructeur de requête = création d'une requête SQL mais en PHP
+        //parram "article" (j'aurais pu écrire"a") = alias, surnom ou mot-clé désignant la table Article
+        $qb = $this->createQueryBuilder("article");
+
+        $query = $qb->select("article")
+            //on retrouve le langage SQL
+            // : word -> placeholder, var SQL qui met en attente ce que l'on veut récupérer (ici word)
+            //afin d'être sûrs que la variable $word soit sécurisée et donc utilisable telle quelle (afin d'éviter une saisie genre SELECT*FROM
+            ->where("article.title LIKE :word")
+            //-> % = contenu dans ce qui va être tapé par l'utilisateur. Recherche non stricte mais élargie
+            // qui permettra de trouver le "$word" inclus dans d'autres caractères, à n'importe quel endroit.
+            ->setParameter("word","%".$search."%")
+            ->getQuery();
+        //je récupère le résultat de la requête que je viens de détailler
+        return $query->getResult();
+    }
 }

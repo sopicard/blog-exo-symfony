@@ -128,13 +128,13 @@ class AdminArticleController extends AbstractController
      */
     public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request)
     {
-        $article=$articleRepository->find($id);
+        $article = $articleRepository->find($id);
 
         $form = $this->createForm(ArticleType::class, $article);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager->persist($article);
             $entityManager->flush();
@@ -142,9 +142,10 @@ class AdminArticleController extends AbstractController
             $this->addFlash("success", " Article modifié ! ");
         }
 
-        return $this->render("admin/update_article.html.twig", ["form"=>$form->createView()]);
-
-
+        return $this->render("admin/update_article.html.twig", [
+            "form" => $form->createView()
+        ]);
+    }
 //        //Modif des données en dur : exercice initial
 //
 //        //les valeurs à modifier
@@ -156,6 +157,24 @@ class AdminArticleController extends AbstractController
 //        //la réponse affichée sur le navigateur, en dur, sans modif twig.
 //        return new Response ("Update performed");
 
+        //-> Création nelle route + fonction (testées avec dd)
+        /**
+         * @Route("/admin/articles/search", name="admin_search_articles")
+         */
+      public function searchArticles(Request $request, ArticleRepository $articleRepository)
+    {
+        //instance classe Request permet récup données dans URL (ma route)
+        $search = $request->query->get("search");
+
+        //instance classe Repository permet de faire le SELECT du SQL
+        //création d'une méthode dans ArticleRepository pour trouver un article en fonction d'1 word ($search) dans son titre
+        $articles = $articleRepository->searchByWord($search);
+
+        //->renvoyer un fichier twig où il y aura tous les articles trouvés et les afficher
+
+        return $this->render("admin/search_articles.html.twig", [
+            "articles"=> $articles
+        ]);
     }
 }
 

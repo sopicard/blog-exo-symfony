@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block main %}
+
+    <section class= "container">
+
+        {% for article in articles %}
+
+            {# la balise article est un copié collé de celle dans articlesList mais
+             sans la condition if sur le "est publié" car nous sommes côté administrateur avec vue sur tous les articles
+              et que cette condition n'est que pour l'utilisateur #}
+                <article>
+                    <h2 class= "article-title">{{ article.title }}</h2>
+                    {# si lien article/catégorie existe #}
+                    {% if article.category %}
+                        <p>{{ article.category.title }}</p>
+                    {% else %}
+                        <p>Catégorie inexistante</p>
+                    {% endif %}
+                    <p class= "author">{{ article.author }}</p>
+                    <a href={{ path("admin_article", {"id": article.id}) }}>Cliquez ici</a>
+                    <a href={{ path("admin_delete_article", {"id": article.id}) }}> Supprimez ici</a>
+                    <a href={{ path("admin_update_article", {"id": article.id}) }}> Modifiez ici</a>
+                </article>
+        {% endfor %}
+    </section>
+{% endblock %}
+
+{% block footer %}
+    <p>footer 2</p>
+{% endblock %}

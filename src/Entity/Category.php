@@ -8,8 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 //->Table générée via cmder
-//php bin/console make:entity
-//ensuite le terminal pose les questions chronologiques de création de class(entité) et de propriétés
+// php bin/console make:entity
+//->Ensuite le terminal pose les questions chronologiques de création de class(entité) et de propriétés
 // avec une différence : propriétés = en private
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)

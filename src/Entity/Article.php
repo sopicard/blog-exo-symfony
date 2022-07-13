@@ -4,9 +4,9 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
-//je crée une entité (avec une class) et je m'assure que le use associé est présent
+//->Création d'une entité (avec une class) et je m'assure que le use associé est présent
 
-//lorsque l'on crée une entité penser à mettre la classe en repository correspondante
+//->Lorsque l'on crée une entité penser à mettre la classe en repository correspondante
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  */
@@ -116,10 +116,10 @@ class Article
         return $this;
     }
 }
-//dans cmder j'ordonne de migrer mes infos php vers la table SQL. un comparatif sera fait entre
+//->Dans cmder j'ordonne de migrer mes infos php vers la table SQL. Un comparatif sera fait entre
 // les infos préexistantes et les nouvelles pour une MAJ
-//fait en 2 temps :
-//php bin/console make:migration
-//bien vérifier mes infos dans le dossier migrations avant de migrer définitivement vers ma table
+//->Fait en 2 temps :
+// php bin/console make:migration
+//->Bien vérifier mes infos dans le dossier migrations avant de migrer définitivement vers ma table
 // puis php bin/console doctrine:migration:migrate
 

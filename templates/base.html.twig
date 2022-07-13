@@ -16,6 +16,12 @@
 <header class= "main-menu">
     <h1 class= "main-title">Blog Exo Symfony</h1>
     <nav class= "navbar">
+        {# je souhaite récup infos URl grâce à méthode GET mais ne veut pas le faire avec l'adresse en dur
+              alors j'utilise path + name de la route #}
+        <form method="GET" action="{{ path("admin_search_articles") }}">
+            <input type="text" name="search">
+            <input type="submit">
+        </form>
         <ul class= "menu">
             <li>
                 <a class= "btn-home" href="{{ path("home") }}"> Accueil </a>
