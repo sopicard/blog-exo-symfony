@@ -157,6 +157,15 @@ class AdminArticleController extends AbstractController
 //        //la réponse affichée sur le navigateur, en dur, sans modif twig.
 //        return new Response ("Update performed");
 
+        //1 AdCo = rte +fct° searchArticle
+        //2 ArRe = rte + fct° pour définir searchArticle
+        //3 basetwig = créa form
+        //4 AdCo = instance request (+test dd $search) + instance Repository
+        //5 ArRe = (test dd "methode depuis le repo" avec search?search=fruit dans URL)
+        //6 ArRe = définir fct° search Article avec QueryBuilder
+        //7 AdCo = renvoyer vers fichier twig (return)
+        //8 Création fichier twig search_articles.html.twig
+
         //-> Création nelle route + fonction (testées avec dd)
         /**
          * @Route("/admin/articles/search", name="admin_search_articles")

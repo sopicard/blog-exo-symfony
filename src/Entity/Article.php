@@ -4,12 +4,20 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 //->Création d'une entité (avec une class) et je m'assure que le use associé est présent
 
 //->Lorsque l'on crée une entité penser à mettre la classe en repository correspondante
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ //le titre de l'article doit être unique
+ * @UniqueEntity("title")
  */
+//pour pouvoir tester bon fonctionnement de mes messages d'erreur penser à supprimer les attributs HTML
+//dans le champ correspondant (ici : titre) sur le navigateur en supprimant (clic droit inspecter)
+//"required=required"
+
 class Article
 {
     /**
@@ -19,10 +27,14 @@ class Article
      */
     private $id;
 
+    //ajout d'une contrainte appelée assert (voir dans use : constraint = assert)
+    //+ use associé + message personnalisé
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Veuillez remplir le titre !")
      */
     private $title;
+
 
     /**
      * @ORM\Column(type="boolean")
@@ -31,6 +43,7 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message = "Vous avez oublié de signer ...")
      */
     private $author;
 

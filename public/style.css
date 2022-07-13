@@ -10,6 +10,7 @@ body {
 }
 
 .main-title {
+    margin:0;
     text-align: center;
     background-color: antiquewhite;
     text-transform: uppercase;
@@ -142,6 +143,9 @@ input[type=submit]{
 }
 footer {
     text-align: center;
+    color:chocolate;
+    text-transform: capitalize;
+    font-weight: bold;
 }
 
 @media screen and (max-width: 768px) {

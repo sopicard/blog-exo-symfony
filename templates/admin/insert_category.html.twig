@@ -9,21 +9,25 @@
         <div class="form-group">
             {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-category-title-label'}}) }}
             {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.title) }}
         </div>
         <div class="form-group">
             {{ form_label(form.color, 'Couleur', {'label_attr': {'class': 'form-category-color-label'}}) }}
             {{ form_widget(form.color, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.color) }}
         </div>
         <div class="form-group">
-    {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-category-description-label'}}) }}
-    {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-category-description-label'}}) }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.description) }}
         </div>
         <div class="form-group">
-    {{ form_label(form.isPublished,'Est publié', {'label_attr': {'class': 'form-isPublished-label' }}) }}
-    {{ form_widget(form.isPublished, {'attr': {'class': 'form-control'}}) }}
+            {{ form_label(form.isPublished,'Est publié', {'label_attr': {'class': 'form-isPublished-label' }}) }}
+            {{ form_widget(form.isPublished, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.isPublished) }}
         </div>
 
-    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+            {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
 
     {{ form_end(form) }}
 

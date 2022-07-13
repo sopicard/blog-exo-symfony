@@ -8,27 +8,35 @@
             <div class="form-group">
                 {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-article-title-label'}}) }}
                 {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                {# 1->Fonction qui s'exécutera uniquement qd je chargerai formulaire. Certaines sont natives
+                 mais on peut en ajouter = contraintes.
+                   2-> inscrires contraintes dans le "code métier" => Entités#}
+                {{ form_errors(form.title) }}
             </div>
             <div class="form-group">
                 {{ form_label(form.content,'Contenu', {'label_attr': {'class': 'form-content-label' }}) }}
                 {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.content) }}
             </div>
             <div class="form-group">
                 {{ form_label(form.isPublished,'Est publié', {'label_attr': {'class': 'form-isPublished-label' }}) }}
                 {{ form_widget(form.isPublished, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.isPublished) }}
             </div>
             <div class="form-group">
                 {{ form_label(form.category,'Categorie', {'label_attr': {'class': 'form-categorie-label' }}) }}
                 {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.category) }}
             </div>
             <div class="form-group">
                 {{ form_label(form.author,'Auteur', {'label_attr': {'class': 'form-author-label' }}) }}
                 {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.author) }}
             </div>
 
                 {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
 
-                {{ form_end(form) }}
+        {{ form_end(form) }}
 
 {% endblock %}
 
