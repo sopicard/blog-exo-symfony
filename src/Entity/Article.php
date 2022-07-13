@@ -54,11 +54,12 @@ class Article
     {
         $this->category = $category;
     }
-    //j'ajoute moi-même le lien entre article et catégorie
+    //->J'ajoute moi-même le lien entre article et catégorie - penser à inversedBy dans param ORM
     //pour articles = 1 seule cat
     //pour cat = plusieurs articles
+    //->ManyToOne crée la clé étrangère qui permettra de relier une catégorie à un article
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
      */
     private $category;
 
@@ -115,7 +116,7 @@ class Article
         return $this;
     }
 }
-// dans cmder j'ordonne de migrer mes infos php vers la table SQL. un comparatif sera fait entre
+//dans cmder j'ordonne de migrer mes infos php vers la table SQL. un comparatif sera fait entre
 // les infos préexistantes et les nouvelles pour une MAJ
 //fait en 2 temps :
 //php bin/console make:migration

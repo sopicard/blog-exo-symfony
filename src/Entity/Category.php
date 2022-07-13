@@ -3,11 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
-use Doctrine\Common\collections\ArrayCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 
-// table générée via cmder
+//->Table générée via cmder
 //php bin/console make:entity
 //ensuite le terminal pose les questions chronologiques de création de class(entité) et de propriétés
 // avec une différence : propriétés = en private
@@ -48,9 +48,12 @@ class Category
      */
     private $articles;
 
-    // Création relation category->articles donc OneToMany
-    //fonction __construct s'executera en tout début de code :
-    //ici je spécifie que $articles devient 1 tableau mais je pourai aussi mettre d'autres valeurs par défaut
+    //->Création relation category->articles donc OneToMany - penser à inser mappedBy dans param ORM
+    //OneToMany ne crée aucune clé (aucune info sup sur la db)
+    //mais permet à Doctrine de comprendre qu'il y a un lien avec la clé étrangère crée dans Article.
+    //->Fonction __construct s'executera en tout début de code si et ssi classe = instanciée (new..):
+    //->Ici je spécifie que $articles devient 1 tableau mais je pourrai aussi mettre d'autres valeurs par défaut
+    //(que l'utilisateur pourra ensuite modifier)
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -63,7 +66,8 @@ class Category
     {
         return $this->articles;
     }
-
+    //->Penser à générer(clic droit) getters & setters
+    //=>Attn aux interprétations de php qui ajoute des : ou des ArrayCollection alors qu'il n'en faut pas
     /**
      * @param ArrayCollection $articles
      */
