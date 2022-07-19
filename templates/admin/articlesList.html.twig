@@ -14,10 +14,11 @@
                   <article>
                       <h2 class= "article-title">{{ article.title }}</h2>
                       {# si lien article/catégorie existe #}
+                      <img class="img-article" src="{{ asset('uploads/images/' ~ article.image) }}" alt=""{{ article.title }}>
                       {% if article.category %}
                         <p>{{ article.category.title }}</p>
                       {% else %}
-                          <p>Catégorie inexistante</p>
+                        <p>Catégorie inexistante</p>
                       {% endif %}
                       <p class= "author">{{ article.author }}</p>
                       <a href={{ path("admin_article", {"id": article.id}) }}>Cliquez ici</a>

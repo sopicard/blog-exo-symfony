@@ -5,7 +5,8 @@ namespace App\Entity;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 //->Table générée via cmder
 // php bin/console make:entity
@@ -13,7 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
 // avec une différence : propriétés = en private
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
+ * @UniqueEntity("title")
  */
+
 class Category
 {
     /**
@@ -25,6 +28,7 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Veuillez remplir le titre !")
      */
     private $title;
 

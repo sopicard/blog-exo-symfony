@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,15 +22,21 @@ class ArticleType extends AbstractType
             ->add('content')
             ->add('isPublished')
             ->add('author')
+
             //ajout d'un champ pour gérer le choix de la cat voulue pour l'article.
             // dont le type est Entity parce que ?
             ->add("category",EntityType::class, [
                 //tableau d'arguments pour mettre en forme notre champ
                 // avec affichage des titres de catégories à choisir
                 "class" => Category::class,
-                "choice_label" => "title"
+                "choice_label" => "title",
+                "placeholder"=>"Choisissez votre catégorie"
             ])
             // je peux en rajouter
+            //ajout d'un champ image
+            ->add("image", FileType::class, [
+                "mapped" => false
+            ])
             ->add("submit", SubmitType::class)
         ;
     }

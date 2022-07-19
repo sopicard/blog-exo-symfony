@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 //Après avoir fait le CRUD avec ma classe article, modifications URL+name routes pour ajouter "admin"
 
@@ -19,7 +20,7 @@ class AdminArticleController extends AbstractController
     /**
      * @Route("/admin/insert_article", name="admin_insert_article")
      */
-    public function insertArticle(EntityManagerInterface $entityManager, Request $request)
+    public function insertArticle(EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger)
     {
         // 2- version "magique" de création de formulaire Symfony :
         //création instance classe Article pour créer nouvel article dans db
@@ -37,6 +38,26 @@ class AdminArticleController extends AbstractController
 
         // si form posté && données valides (ex: pas de caractères type string dans date)
         if($form->isSubmitted() && $form->isValid()){
+
+            // je recupere l'image dans le formulaire l'image est en mapped false donc c'est a moi de gerer l'upload
+            $image= $form->get('image')->getData();
+
+            // je recupere le nom du fichier original
+            $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+
+            // j'utilise une instance de la classe Slugger et sa methode slug pour supprimer les caracteres
+            // spéciaux, espaces etc du nom du fichier
+            $safeFilename = $slugger->slug($originalFilename);
+
+            // je rajoute au nom de l'image, un identifiant unique ( au cas ou l'image soit uploadée plusieurs fois
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
+
+            // je deplace l'image dans le dossier public et je la renomme avec le nouveau nom créé
+            $image->move(
+                $this->getParameter('images_directory'),
+                $newFilename
+            );
+            $article->setImage($newFilename);
             //pré enregistrement et envoi pour enregistrement ok
             $entityManager->persist($article);
             $entityManager->flush();
@@ -126,7 +147,7 @@ class AdminArticleController extends AbstractController
     /**
      * @Route("/admin/articlesList/update/{id}", name="admin_update_article")
      */
-    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request)
+    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger)
     {
         $article = $articleRepository->find($id);
 
@@ -136,6 +157,25 @@ class AdminArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $image= $form->get('image')->getData();
+
+            // je recupere le nom du fichier original
+            $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+
+            // j'utilise une instance de la classe Slugger et sa methode slug pour supprimer les caracteres
+            // spéciaux, espaces etc du nom du fichier
+            $safeFilename = $slugger->slug($originalFilename);
+
+            // je rajoute au nom de l'image, un identifiant unique ( au cas ou l'image soit uploadée plusieurs fois
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$image->guessExtension();
+
+            // je deplace l'image dans le dossier public et je la renomme avec le nouveau nom créé
+            $image->move(
+                $this->getParameter('images_directory'),
+                $newFilename
+            );
+            $article->setImage($newFilename);
+
             $entityManager->persist($article);
             $entityManager->flush();
 
@@ -143,7 +183,8 @@ class AdminArticleController extends AbstractController
         }
 
         return $this->render("admin/update_article.html.twig", [
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "article" => $article
         ]);
     }
 //        //Modif des données en dur : exercice initial

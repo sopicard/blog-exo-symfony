@@ -76,6 +76,27 @@ class Article
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $image;
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

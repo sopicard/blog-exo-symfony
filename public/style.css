@@ -148,6 +148,10 @@ footer {
     font-weight: bold;
 }
 
+.img-article {
+    width: 20%;
+}
+
 @media screen and (max-width: 768px) {
 
     .container {
